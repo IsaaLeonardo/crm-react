@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 
-function layout() {
+function Layout() {
   return (
     <div>
       <h1 className="text-6xl">CRM - Clientes</h1>
@@ -10,4 +10,4 @@ function layout() {
   )
 }
 
-export default layout
+export default Layout
