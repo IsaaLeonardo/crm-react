@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './index.css'
 import Layout from './components/Layout'
-import Home from './pages/Home'
+import Home, { loader as homeLoader } from './pages/Home'
 import NewClient from './pages/NewClient'
 
 const router = createBrowserRouter([
   { path: '/',
     element: <Layout />,
     children: [
-      { index: true,
-        element: <Home />
+      {
+        index: true,
+        element: <Home />,
+        loader: homeLoader,
       },
       {
         path: '/clientes/nuevo',
