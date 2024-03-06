@@ -48,7 +48,8 @@ function Home() {
 
   return (
     <>
-      <h1>Clientes</h1>
+      <h1 className="font-black text-4xl text-blue-900">Clientes</h1>
+      <p className="mt-3">Administra tus clientes</p>
 
       { clients.length ? (
           <ClientsTable clients={clients}/>
