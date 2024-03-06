@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom"
+import ClientsTable from "../components/ClientsTable";
 
 export function loader() {
   const clientes = [
@@ -45,12 +46,19 @@ export function loader() {
 function Home() {
   const clients = useLoaderData()
 
-
-
   return (
-    <div>
-      <h1>Inicio</h1>
-    </div>
+    <>
+      <h1>Clientes</h1>
+
+      { clients.length ? (
+          <ClientsTable clients={clients}/>
+        ) : (
+          <p className="text-center mt-10">
+            No hay clientes aún
+          </p>
+        )
+      }
+    </>
   )
 }
 
