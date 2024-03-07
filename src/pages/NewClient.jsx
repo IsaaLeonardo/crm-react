@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import Inputs from "../components/Inputs"
 
 function NewClient() {
   const navigate = useNavigate()
@@ -18,7 +19,15 @@ function NewClient() {
       </div>
 
       <div className="bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10">
-        <p>Formulario aquí</p>
+        <form>
+          <Inputs />
+
+          <input
+            type="submit"
+            className="mt-5 w-full bg-blue-800 p-3 uppercase font-bold text-white text-lg hover:bg-blue-700 cursor-pointer"
+            value="Registrar Cliente"
+          />
+        </form>
       </div>
     </>
   )
