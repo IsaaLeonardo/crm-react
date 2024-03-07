@@ -1,8 +1,26 @@
-import { useNavigate } from "react-router-dom"
+import { Form, useActionData, useNavigate } from "react-router-dom"
 import Inputs from "../components/Inputs"
+import Error from "../components/Error"
+
+export async function action({ request }) {
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData)
+
+  // Validate data
+  const errors = []
+
+  if (Object.values(data).includes('')) {
+    errors.push('Todos los campos son obligatorios')
+  }
+
+  if (errors.length) {
+    return errors
+  }
+}
 
 function NewClient() {
   const navigate = useNavigate()
+  const errors = useActionData()
 
   return (
     <>
@@ -19,7 +37,9 @@ function NewClient() {
       </div>
 
       <div className="bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10">
-        <form>
+        { errors && errors.map((error, index) => <Error key={ index }>{error}</Error>) }
+
+        <Form method="post">
           <Inputs />
 
           <input
@@ -27,7 +47,7 @@ function NewClient() {
             className="mt-5 w-full bg-blue-800 p-3 uppercase font-bold text-white text-lg hover:bg-blue-700 cursor-pointer"
             value="Registrar Cliente"
           />
-        </form>
+        </Form>
       </div>
     </>
   )
