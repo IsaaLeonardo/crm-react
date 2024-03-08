@@ -1,6 +1,4 @@
 const Inputs = ({ cliente }) => {
-    const { name, company, email, phone, notes } = cliente
-
     return (
         <>
             <div className="mb-4">
@@ -16,7 +14,7 @@ const Inputs = ({ cliente }) => {
                     className="mt-2 block w-full p-3 bg-gray-100"
                     placeholder="Nombre del Cliente"
                     name="name"
-                    defaultValue={ name }
+                    defaultValue={ cliente?.name }
                 />
             </div>
 
@@ -33,7 +31,7 @@ const Inputs = ({ cliente }) => {
                     className="mt-2 block w-full p-3 bg-gray-100"
                     placeholder="Empresa del Cliente"
                     name="company"
-                    defaultValue={ company }
+                    defaultValue={ cliente?.company }
                 />
             </div>
 
@@ -50,7 +48,7 @@ const Inputs = ({ cliente }) => {
                     className="mt-2 block w-full p-3 bg-gray-100"
                     placeholder="Email del Cliente"
                     name="email"
-                    defaultValue={ email }
+                    defaultValue={ cliente?.email }
                 />
             </div>
 
@@ -67,7 +65,7 @@ const Inputs = ({ cliente }) => {
                     className="mt-2 block w-full p-3 bg-gray-100"
                     placeholder="Teléfono del Cliente"
                     name="phone"
-                    defaultValue={ phone }
+                    defaultValue={ cliente?.phone }
                 />
             </div>
 
@@ -85,7 +83,7 @@ const Inputs = ({ cliente }) => {
                     className="mt-2 block w-full p-3 bg-gray-100 h-40 align-self"
                     placeholder="Notas del Cliente"
                     name="notes"
-                    defaultValue={ notes }
+                    defaultValue={ cliente?.notes }
                 />
             </div>
         </>
