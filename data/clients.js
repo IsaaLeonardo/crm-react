@@ -5,6 +5,16 @@ export async function getClients() {
   return clients
 }
 
+export async function getClient(id) {
+  const response = await fetch(import.meta.env.VITE_API_URL + '/clients/' + id)
+
+  if (!response.ok) {
+    return {}
+  }
+
+  return await response.json()
+}
+
 export async function createClient(request) {
   const response = await fetch(import.meta.env.VITE_API_URL + '/clients', {
     method: 'POST',
