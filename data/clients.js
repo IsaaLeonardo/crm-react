@@ -26,3 +26,15 @@ export async function createClient(request) {
 
   return response.json()
 }
+
+export async function updateClient(id, request) {
+  const response = await fetch(import.meta.env.VITE_API_URL + '/clients/' + id, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(request)
+  })
+
+  return response.json()
+}

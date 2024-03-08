@@ -1,6 +1,7 @@
-import { Form, useLoaderData, useNavigate } from "react-router-dom"
-import { getClient } from "../../data/clients"
+import { Form, redirect, useActionData, useLoaderData, useNavigate } from "react-router-dom"
+import { getClient, updateClient } from "../../data/clients"
 import Inputs from "./Inputs"
+import Error from "./Error"
 
 export async function loader({ params }) {
   const client = await getClient(params.clientId)
@@ -15,8 +16,37 @@ export async function loader({ params }) {
   return client
 }
 
+export async function action({ request, params }) {
+  const formData = await request.formData()
+  const data = Object.fromEntries(formData)
+
+  const email = formData.get('email')
+  const regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])")
+
+  // Validate data
+  const errors = []
+
+  if (Object.values(data).includes('')) {
+    errors.push('Todos los campos son obligatorios')
+  }
+
+  if (!regex.test(email)) {
+    errors.push('El email no es válido')
+  }
+
+  if (errors.length) {
+    return errors
+  }
+
+  // Send data to the server
+  await updateClient(params.clientId, data)
+
+  return redirect('/')
+}
+
 function EditClient() {
   const navigate = useNavigate()
+  const errors = useActionData()
   const client = useLoaderData()
 
   return (
@@ -34,7 +64,7 @@ function EditClient() {
       </div>
 
       <div className="bg-white shadow rounded-md md:w-3/4 mx-auto px-5 py-10">
-        {/* { errors && errors.map((error, index) => <Error key={ index }>{error}</Error>) } */}
+        { errors && errors.map((error, index) => <Error key={ index }>{error}</Error>) }
 
         <Form method="post" noValidate>
           <Inputs cliente={ client } />
