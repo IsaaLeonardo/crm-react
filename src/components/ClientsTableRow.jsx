@@ -1,9 +1,20 @@
 import { useNavigate } from "react-router-dom"
+import { deleteClient } from "../../data/clients"
 
 function ClientsTableRow({ client }) {
   const { id, name, phone, email, company } = client
 
   const navigate = useNavigate()
+
+  const handleDelete = async () => {
+    if (!confirm('¿Estás seguro de eliminar este cliente?')) {
+      return
+    }
+
+    // Delete client and then redirect
+    await deleteClient(id)
+    navigate('/')
+  }
 
   return (
     <tr className="border-b">
@@ -24,7 +35,12 @@ function ClientsTableRow({ client }) {
         >
           Editar
         </button>
-        <button className="text-red-600 hover:text-red-700 uppercase font-bold text-xs">Eliminar</button>
+        <button
+          className="text-red-600 hover:text-red-700 uppercase font-bold text-xs"
+          onClick={() => handleDelete() }
+        >
+          Eliminar
+        </button>
       </td>
     </tr>
   )

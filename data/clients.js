@@ -38,3 +38,11 @@ export async function updateClient(id, request) {
 
   return response.json()
 }
+
+export async function deleteClient(id) {
+  const response = await fetch(import.meta.env.VITE_API_URL + '/clients/' + id, {
+    method: 'DELETE'
+  })
+
+  return response.json()
+}
